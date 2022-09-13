@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: stripe
+    description: Incoming stripe payment data.
+    database: raw
+    tables:
+      - name: payment
+        columns:
+          - name: id
+            description: The primary key for the payment
+            tests:
+              - not_null
+              - unique
+          - name: order_id
+            description: The foreign key to the orders table
+          - name: paymentmethod
+            description: The payment method used for the order
+            tests:
+              - accepted_values:
+                  values: ['credit_card', 'bank_transfer', 'gift_card', 'coupon']
+          - name: status
+            description: The payment status, either success or fail
+            tests:
+              - accepted_values:
+                  values: ['success', 'fail']
+          - name: amount
+            description: The amount of the payment in US cents
+          - name: created
+            description: The date the payment was processed
+          - name: _batched_at
+            description: The timestamp the row of data was loaded
