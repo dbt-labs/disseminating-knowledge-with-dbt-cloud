@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description: This model cleans up payment field names and ensures amount is in Dollars
+    columns:
+      - name: payment_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: payment_method
+        description: Includes four payment sources (CC, Gift Card, Coupon and Bank Transfer)
+        tests:
+          - accepted_values:
+              values: ['credit_card', 'bank_transfer', 'gift_card', 'coupon']
+      - name: amount
+        description: Stored in Dollars. The amount should be >= 0
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>=0'
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['success', 'fail']
+      - name: order_id
+        description: Order the payment was applied to.
+          
+          
+        

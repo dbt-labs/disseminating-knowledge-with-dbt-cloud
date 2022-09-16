@@ -11,7 +11,8 @@ models:
           - not_null
       - name: first_order_date
         description: NULL when a customer has not yet placed an order.
-
+      - name: lifetime_value
+        description: The sum of all orders for a given customer
   - name: orders
     description: Complete orders model including the amount associated with each order.
     tests:
@@ -23,3 +24,7 @@ models:
         tests:
           - unique
           - not_null
+      - name: customer_id
+        description: The customer who placed the order
+  - name: payments__pivoted
+    description: This lists each order and all the payment methods used to satisfy that order. (e.g. Credit Card + Coupon, etc.)
