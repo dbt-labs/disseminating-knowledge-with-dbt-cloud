@@ -11,6 +11,10 @@ sources:
             tests:
               - not_null
               - unique
+          - name: first_name
+            description: First name of the customer
+          - name: last_name
+            description: Last name of the customer
       - name: orders
         description: One record per order
         loaded_at_field: _etl_loaded_at
@@ -19,11 +23,20 @@ sources:
           error_after: {count: 24, period: hour}
         columns:
           - name: id
+            description: Primary key
             tests:
               - unique
               - not_null
+          - name: user_id
+            description: The customer id associated with the order
+            
+              
+          - name: order_date
+            description: The date the order was created
           - name: status
             description: "{{ doc('order_status') }}"
             tests:
               - accepted_values:
                   values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+          - name: _etl_loaded_at
+            description: The timestamp this specific row of data was loaded.
