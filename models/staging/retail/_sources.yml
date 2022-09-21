@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: retail
+    schema: retail
+    tables:
+      - name: customers
+      - name: loyalty_segments
+      - name: sales_orders
+      - name: products
