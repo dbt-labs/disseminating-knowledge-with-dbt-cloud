@@ -16,8 +16,20 @@ staged as (
         order_datetime,
         ordered_products,
         promo_info,
-        clicked_items
+        clicked_items,
+        count(*) over (
+            partition by order_number
+            order by order_datetime desc
+        ) as order_count
     from source
+),
+
+deduped as (
+
+    select *
+    from staged
+    where order_count = 1
+
 )
 
-select * from staged
+select * from deduped
