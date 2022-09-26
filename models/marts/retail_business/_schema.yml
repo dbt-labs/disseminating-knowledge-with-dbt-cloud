@@ -15,7 +15,7 @@ models:
           - not_null
   - name: int_retail_order_items
     columns:
-      - name: order_id
+      - name: order_item_id
         tests:
           - unique
           - not_null
