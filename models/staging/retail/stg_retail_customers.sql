@@ -2,6 +2,7 @@ with
 
 source as (
     select * from {{ source('retail','customers')}}
+    where valid_to is null -- only bring in the most up to date customer record
 ),
 
 staged as (

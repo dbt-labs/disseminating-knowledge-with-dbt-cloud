@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_retail_customers
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+  - name: dim_retail_loyalty_segments
+    columns:
+      - name: loyalty_segment_id
+        tests:
+          - unique
+          - not_null
+  - name: int_retail_order_items
+    columns:
+      - name: order_item_id
+        tests:
+          - unique
+          - not_null

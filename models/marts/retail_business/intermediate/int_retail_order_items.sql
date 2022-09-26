@@ -31,6 +31,15 @@ order_items as (
         item_details.price * item_details.qty as items_total
     from exploded
 
+),
+
+-- adding surrogate key to test for uniqueness
+
+final as (
+    select
+        {{ dbt_utils.surrogate_key(['order_id','customer_id','product_id','price']) }} as order_item_id,
+        *
+    from order_items
 )
 
-select * from order_items
+select * from final

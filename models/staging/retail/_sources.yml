@@ -4,7 +4,266 @@ sources:
   - name: retail
     schema: retail
     tables:
+      - name: active_promotions
+        columns:
+          - name: promo_customer
+            description: Customer id associated with the promotion.
+            tests:
+              - not_null
+          - name: promo_item
+            description: Product associated with the promotion.
+            tests:
+              - not_null
+          - name: promo_disc
+            description: Discount associated with the promotion.
+          - name: promo_id
+            description: Promotion id associate with the active promotion.
+          - name: promo_datetime
+            description: Datetime when promotion became active
+          - name: promo_qty
+            description: Total sum of products towards the promotion
+          - name: cumsum
+            description: Total sum of products for the customers
+          - name: promo_began
+            description: Datetime the promotion began
+          - name: units_required
+            description: Units required to use the promotion
+          - name: eligible
+            description: True if the customer is eligible for the promotion
+          - name: deadline
+            description: Datetime to use the promotion by
+      - name: company_employees
+        columns:
+          - name: employee_id
+            description: Primary key for employees, not unique
+            tests:
+              - not_null
+          - name: employee_name
+            description: Employee's full name
+          - name: department
+            description: Department that the employee sits in
+            tests:
+              - accepted_values:
+                  values: ['OFFICE','SALES','PRODUCTION']
+          - name: region
+            description: Region where the employee is assigned
+            tests:
+              - accepted_values:
+                  values: ['South','West','Midwest','Northeast',NULL]
+          - name: employee_key
+            description: Secondary key assigned to employees
+          - name: active_record
+            description: Boolean to determin if employee is active
+          - name: active_record_start
+            description: Employee start date
+          - name: active_record_end
+            description: Employee end date if not longer active
+
       - name: customers
+        columns:
+          - name: customer_id
+            description: Primary key for the customer, not unique
+            tests:
+              - not_null
+          - name: tax_id
+          - name: tax_code
+          - name: customer_name
+            description: Customer's full name
+          - name: state
+            description: State where the customer lives
+          - name: city
+            description: City where the customer lives
+          - name: postcode
+            description: Postcode where the customer lives
+          - name: street
+            description: Street where the customer lives
+          - name: number
+            description: Address number where the customer lives
+          - name: unit
+            description: Apartment unit if applicable
+          - name: region
+            description: Region where the customer lives (state)
+          - name: district
+            description:  District where the customer lives
+          - name: lon
+            description: Longitude of the customer
+          - name: lat
+            description: Latitude of the customer
+          - name: ship_to_address
+            description: Shipping address
+          - name: valid_from
+            description: Start time when record is valid
+          - name: valid_to
+            description: End time when record is no longer valid, null if still valid
+          - name: units purchased
+            description: Number of unites purchased
+          - name: loyalty_segment
+            description: Loyalty segment the customer is assigned to.                        
+                                                                 
       - name: loyalty_segments
-      - name: sales_orders
+        columns:
+          - name: loyalty_segment_id
+            description: Primary key for loyalty segment
+            tests:
+              - unique
+              - not_null
+          - name: loyalty_segment_description
+            description: Description of loyalty segment
+          - name: unit_threshold
+            description: Threshold to access loyalty segment
+          - name: valid_from
+            description: Date when record started to be valid
+          - name: valid_to
+            description: Date when record became no longer valid, null if still valid                             
+          
       - name: products
+        columns:
+          - name: product_id
+            description: Primary key for the product
+            tests:
+              - unique
+              - not_null
+          - name: product_category
+            description: Brand of the product
+          - name: product_name
+            description: Full product name
+          - name: sales_price
+            description: Sales price of the product in USD
+          - name: EAN13
+            description: EAN-13 barcode number
+          - name: EAN5
+            description: EAN-5 barcode number
+          - name: product_unit
+            description: Unit associated with the product                                                           
+
+      - name: promotions
+        columns:
+          - name: promotion_id
+            description: The primary key of the promotion
+          - name: promotion_type
+            description: The type of promotion
+          - name: dollar_discount
+            description: The dollar discount associated with the promotion
+          - name: percent_discount
+            description: The percent discount associated with the promotion
+          - name: qualifying_products
+            description: The product eligible for the promotion.
+          - name: units_required
+            description: The units required to access the promotion
+          - name: free_product_ids
+          - name: length
+          - name: valid_from
+            description: The start date when the record is valid
+          - name: valid_to
+            description: The end date when the record is valid, null if still valid
+
+      - name: purchase_orders
+        columns:
+          - name: EAN13
+            description: 13 digit barcode for product
+          - name: EAN5
+            description: 5 digit barcorde for product
+          - name: PO
+            description: Primary key for purchase order, not unique
+          - name: datetime
+            description: Full datetime at time of purchase order
+          - name: password
+            description: Password for accessing the purchase order
+          - name: price
+            description: Prive of the item
+          - name: product_name
+            description: Full product name
+          - name: product_unit
+            description: Units associated with the product number (e.g. pcs)
+          - name: purchaser
+            description: Name of the person who completed the purchase order
+          - name: quantity
+            description: Number of units associated with the purchase order
+          - name: supplier
+            descripton: Name of the supplier for the purchase order
+
+      - name: sales_orders
+        columns:
+          - name: clicked_items
+            description: Items that the customer clicked on during their shopping trip
+          - name: customer_id
+            description: Foreign key to the customer
+          - name: customer_name
+            description: Full name of the customer (Last, First)
+          - name: number_of_line_items
+            description: Number of unique line items on the order                               
+          - name: order_datetime
+            description: Date the order was placed
+          - name: order_number
+            description: Order number for the key
+          - name: ordered_products
+            description: Products ordered by the customer
+          - name: promo_info
+            description: Promotions included with the order                          
+            
+      - name: sales_stream
+        columns:
+          - name: 5minutes
+            description: 5 minute window for the shopping trip
+          - name: clicked_items
+            description: Items that the customer clicked on during their shopping trip.
+          - name: customer_id
+            description: Foreign key to the customer table
+          - name: customer_name
+            description: Full name of the customer
+          - name: datetime
+            description: Full datetime for the shopping trip
+          - name: hour
+            description: Hour of the shopping trip
+          - name: minute
+            description: Minute of the shopping trip
+          - name: number_of_line_items
+            description: Number of line items 
+          - name: order_datetime
+            description: Datetime of the order in EPOCH
+          - name: order_number
+            description: Order number
+          - name: ordered_products
+            description: Products contained within the order
+          - name: sales_person
+            description: Sales person ID associated with the sale
+          - name: ship_to_address
+            description: Address used for shipping the order
+
+      - name: suppliers
+        columns:
+          - name: supplier_id
+            description: Primary key for the supplier
+            tests:
+              - unique
+              - not_null
+          - name: tax_id
+            description: Tax ID associated with the supplier
+          - name: supplier_name
+            description: Full name of the supplier
+          - name: state
+            description: State where the supplier is located
+          - name: city
+            description: City where the supplier is located
+          - name: postcode
+            description: Post code for the supplier
+          - name: street
+            description: Street for the supplier
+          - name: number
+            description: Street number for the supplier
+          - name: unit
+            description: Unit associated with the supplier's address
+          - name: region
+            description: Region where the supplier is located
+          - name: district
+            description: District of the supplier if applicable
+          - name: lon
+            description: Longitude location of the supplier
+          - name: lat
+            description: Latitude location of the supplier
+          - name: items_provided
+            description: List of items provided by the suppliers, separated by commas
+
+
+
+
