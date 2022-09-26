@@ -156,22 +156,31 @@ sources:
             description: The start date when the record is valid
           - name: valid_to
             description: The end date when the record is valid, null if still valid
+
       - name: purchase_orders
         columns:
-          - name:
-            description: 
-          - name:
-            description: 
-          - name:
-            description: 
-          - name:
-            description: 
-          - name:
-            description: 
-          - name:
-            description: 
-          - name:
-            description: 
+          - name: EAN13
+            description: 13 digit barcode for product
+          - name: EAN5
+            description: 5 digit barcorde for product
+          - name: PO
+            description: Primary key for purchase order, not unique
+          - name: datetime
+            description: Full datetime at time of purchase order
+          - name: password
+            description: Password for accessing the purchase order
+          - name: price
+            description: Prive of the item
+          - name: product_name
+            description: Full product name
+          - name: product_unit
+            description: Units associated with the product number (e.g. pcs)
+          - name: purchaser
+            description: Name of the person who completed the purchase order
+          - name: quantity
+            description: Number of units associated with the purchase order
+          - name: supplier
+            descripton: Name of the supplier for the purchase order
 
       - name: sales_orders
         columns:
@@ -179,9 +188,6 @@ sources:
             description: Items that the customer clicked on during their shopping trip
           - name: customer_id
             description: Foreign key to the customer
-            tests:
-              - unique
-              - not_null
           - name: customer_name
             description: Full name of the customer (Last, First)
           - name: number_of_line_items
@@ -196,10 +202,68 @@ sources:
             description: Promotions included with the order                          
             
       - name: sales_stream
-
-
+        columns:
+          - name: 5minutes
+            description: 5 minute window for the shopping trip
+          - name: clicked_items
+            description: Items that the customer clicked on during their shopping trip.
+          - name: customer_id
+            description: Foreign key to the customer table
+          - name: customer_name
+            description: Full name of the customer
+          - name: datetime
+            description: Full datetime for the shopping trip
+          - name: hour
+            description: Hour of the shopping trip
+          - name: minute
+            description: Minute of the shopping trip
+          - name: number_of_line_items
+            description: Number of line items 
+          - name: order_datetime
+            description: Datetime of the order in EPOCH
+          - name: order_number
+            description: Order number
+          - name: ordered_products
+            description: Products contained within the order
+          - name: sales_person
+            description: Sales person ID associated with the sale
+          - name: ship_to_address
+            description: Address used for shipping the order
 
       - name: suppliers
+        columns:
+          - name: supplier_id
+            description: Primary key for the supplier
+            tests:
+              - unique
+              - not_null
+          - name: tax_id
+            description: Tax ID associated with the supplier
+          - name: supplier_name
+            description: Full name of the supplier
+          - name: state
+            description: State where the supplier is located
+          - name: city
+            description: City where the supplier is located
+          - name: postcode
+            description: Post code for the supplier
+          - name: street
+            description: Street for the supplier
+          - name: number
+            description: Street number for the supplier
+          - name: unit
+            description: Unit associated with the supplier's address
+          - name: region
+            description: Region where the supplier is located
+          - name: district
+            description: District of the supplier if applicable
+          - name: lon
+            description: Longitude location of the supplier
+          - name: lat
+            description: Latitude location of the supplier
+          - name: items_provided
+            description: List of items provided by the suppliers, separated by commas
+
 
 
 
