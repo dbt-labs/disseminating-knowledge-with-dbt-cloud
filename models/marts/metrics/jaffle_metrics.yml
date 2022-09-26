@@ -1,0 +1,17 @@
+version: 2
+
+
+metrics:
+  - name: average_order_amount_by_status
+    description: "The average size of a jaffle order by status"
+    label: metric_average_order_amount.
+    model: ref('orders')
+
+    type: average
+    sql: amount
+
+    timestamp: order_date
+    time_grains: [day, week, month]
+
+    dimensions:
+      - status

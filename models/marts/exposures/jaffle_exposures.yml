@@ -2,12 +2,12 @@ version: 2
 
 exposures:
   
-  - name: jaffle_metrics_weekly
+  - name: jaffle_metrics_weekly_by_customer
     type: dashboard
     maturity: high
     url: https://bi.tool/dashboards/1
     description: >
-      Did someone say "exponential growth"?
+      Total weekly orders by customer
     depends_on:
       - ref('orders')
       - ref('customers')   
@@ -27,12 +27,12 @@ exposures:
       name: Claire from Data
       email: data@jaffleshop.com
 
-  - name: jaffle_metrics_monthly_orders
+  - name: jaffle_metrics_monthly_order_amounts
     type: dashboard
     maturity: high
     url: https://bi.tool/dashboards/3
     description: >
-      Did someone say "exponential growth"?
+      Total orders for the month in dollars
     depends_on:
       - ref('orders') 
     owner:
