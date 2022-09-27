@@ -57,7 +57,7 @@ models:
       - name: valid_from
         description: Date when record started to be valid
       - name: valid_to
-        description: Date when record bacame invalid, NULL if still valid
+        description: Date when record became invalid, NULL if still valid
 
   - name: stg_retail_sales_orders
     columns:
