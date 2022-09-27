@@ -9,7 +9,11 @@ models:
           - unique
           - not_null
       - name: loyalty_segment_id
-        description: Foreign key to the customers assigned loyalty segmemnt
+        description: Foreign key to the customers assigned loyalty segment
+        tests:
+          - relationships:
+              to: ref('stg_retail_loyalty_segments')
+              field: loyalty_segment_id
       - name: customer_name
         description: Customer's full name
       - name: state
@@ -63,8 +67,11 @@ models:
           - unique
           - not_null
       - name: customer_id
-        description: Customer who placed the order
-        ## Place relationship test here ##
+        description: Customer who placed the order 
+        tests:
+          - relationships:
+              to: ref('stg_retail_customers')
+              field: customer_id
       - name: customer_name
         description: Full customer name (Last, First)
       - name: number_of_line_items
