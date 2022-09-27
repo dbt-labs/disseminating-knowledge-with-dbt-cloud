@@ -28,7 +28,7 @@ staged as (
         ship_to_address,
 
         -- meta
-        valid_from,
+        from_unixtime(valid_from) as valid_from, -- Convert from EPOCH time to TimeDate UTC
         valid_to
     from source
 )
