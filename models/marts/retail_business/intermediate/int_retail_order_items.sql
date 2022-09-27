@@ -24,7 +24,7 @@ order_items as (
         item_details.id as product_id,
         item_details.curr as currency,
         item_details.name as product_name,
-        item_details.price as price,
+        item_details.price,
         item_details.promotion_info as promo_info,
         item_details.qty as quantity,
         item_details.unit as unit,

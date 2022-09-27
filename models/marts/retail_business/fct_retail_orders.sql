@@ -33,7 +33,7 @@ joined as (
         sales_orders.customer_id,
         sales_orders.customer_name,
         sales_orders.number_of_line_items,
-        sales_orders.order_datetime,
+        order_datetime,
         aggregated.order_total,
         aggregated.order_total_items,
         aggregated.number_of_unique_items

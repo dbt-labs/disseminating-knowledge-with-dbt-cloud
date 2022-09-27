@@ -1,0 +1,13 @@
+version: 2
+
+metrics:
+  - name: order_total_by_time
+    description: "The total amounts of a retail order"
+    label: metric_total_order_amount
+    model: ref('fct_retail_orders')
+
+    type: sum
+    sql: order_total
+
+    timestamp: order_datetime
+    time_grains: [day, week, month]

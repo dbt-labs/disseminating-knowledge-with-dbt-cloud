@@ -13,7 +13,7 @@ staged as (
         customer_id,
         customer_name,
         number_of_line_items,
-        order_datetime,
+        from_unixtime(order_datetime) as order_datetime, -- Convert from EPOCH time to TimeDate UTC
         ordered_products,
         promo_info,
         clicked_items,

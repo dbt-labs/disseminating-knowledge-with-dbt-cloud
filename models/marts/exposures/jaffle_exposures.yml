@@ -1,15 +1,18 @@
 version: 2
 
 exposures:
+
   - name: jaffle_shop_dashboard
     type: dashboard
     maturity: high
     url: https://dbc-53b529b0-a00d.cloud.databricks.com/sql/dashboards/68df87c9-3e8a-43cb-abb4-21dc87a82e82-jaffle-shop
     description: A single dashboard for visualizing data about the Jaffle Shop.
+
     depends_on:
       - ref('orders') 
       - ref('customers')
     owner:
+
       name: Coap from dbt Labs
       email: kcoapman@dbtlabs.com
 
@@ -23,3 +26,4 @@ exposures:
     owner:
       name: Dan from dbt Labs
       email: dan.horner@dbtlabs.com
+
