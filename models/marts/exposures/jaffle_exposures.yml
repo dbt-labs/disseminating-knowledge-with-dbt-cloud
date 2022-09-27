@@ -1,52 +1,29 @@
 version: 2
 
 exposures:
-  
-  - name: jaffle_metrics_weekly_by_customer
-    type: dashboard
-    maturity: high
-    url: https://bi.tool/dashboards/1
-    description: >
-      Total weekly orders by customer
-    depends_on:
-      - ref('orders')
-      - ref('customers')   
-    owner:
-      name: Claire from Data
-      email: data@jaffleshop.com
 
-  - name: jaffle_metrics_payment_types_by_order
+  - name: jaffle_shop_dashboard
     type: dashboard
     maturity: high
-    url: https://bi.tool/dashboards/2
-    description: >
-      Shows orders and all payment types for each
-    depends_on:
-      - ref('payments__pivoted')  
-    owner:
-      name: Claire from Data
-      email: data@jaffleshop.com
+    url: https://dbc-53b529b0-a00d.cloud.databricks.com/sql/dashboards/68df87c9-3e8a-43cb-abb4-21dc87a82e82-jaffle-shop
+    description: A single dashboard for visualizing data about the Jaffle Shop.
 
-  - name: jaffle_metrics_monthly_order_amounts
-    type: dashboard
-    maturity: high
-    url: https://bi.tool/dashboards/3
-    description: >
-      Total orders for the month in dollars
     depends_on:
       - ref('orders') 
+      - ref('customers')
     owner:
-      name: Claire from Data
-      email: data@jaffleshop.com
 
-  - name: can_you_hang_exposure_to_metric
+      name: Coap from dbt Labs
+      email: kcoapman@dbtlabs.com
+
+  - name: retail_dashboard
     type: dashboard
     maturity: high
-    url: https://bi.tool/dashboards/4
-    description: >
-      Total orders for the month in dollars
+    url: tbd
+    description: A single dashboard for visualizing data about the Retail Shop
     depends_on:
-      - ref('metric_order_total_by_time') 
+      - ref('dim_retail_loyalty_segments')
     owner:
-      name: Claire from Data
-      email: data@jaffleshop.com
+      name: Dan from dbt Labs
+      email: dan.horner@dbtlabs.com
+
