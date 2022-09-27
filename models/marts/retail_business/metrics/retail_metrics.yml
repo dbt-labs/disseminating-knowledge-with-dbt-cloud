@@ -1,7 +1,7 @@
 version: 2
 
 metrics:
-  - name: total_order_total_by_status
+  - name: order_total_by_time
     description: "The total amounts of a retail order"
     label: metric_total_order_amount
     model: ref('fct_retail_orders')

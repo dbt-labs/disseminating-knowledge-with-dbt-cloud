@@ -38,3 +38,15 @@ exposures:
     owner:
       name: Claire from Data
       email: data@jaffleshop.com
+
+  - name: can_you_hang_exposure_to_metric
+    type: dashboard
+    maturity: high
+    url: https://bi.tool/dashboards/4
+    description: >
+      Total orders for the month in dollars
+    depends_on:
+      - ref('metric_order_total_by_time') 
+    owner:
+      name: Claire from Data
+      email: data@jaffleshop.com
