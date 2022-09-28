@@ -19,7 +19,7 @@ exposures:
   - name: retail_dashboard
     type: dashboard
     maturity: high
-    url: tbd
+    url: https://dbc-53b529b0-a00d.cloud.databricks.com/sql/dashboards/4edd661e-4561-43e8-ada3-cc0261fcd81d-retail-dashboard---loyalty-segment-characteristics?o=3680856284610203
     description: A single dashboard for visualizing data about the Retail Shop
     depends_on:
       - ref('dim_retail_loyalty_segments')
