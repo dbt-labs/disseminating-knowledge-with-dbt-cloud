@@ -4,20 +4,83 @@ models:
   - name: stg_retail_customers
     columns:
       - name: customer_id
+        description: Primary key for the customer
         tests:
           - unique
           - not_null
+      - name: loyalty_segment_id
+        description: Foreign key to the customers assigned loyalty segment
+        tests:
+          - relationships:
+              to: ref('stg_retail_loyalty_segments')
+              field: loyalty_segment_id
+      - name: customer_name
+        description: Customer's full name
+      - name: state
+        description: State where the customer lives
+      - name: city
+        description: City where the customer lives
+      - name: zipcode
+        description: Postal (Zip) code where the customer lives
+      - name: street
+        description: Street where the customer lives
+      - name: number
+        description: Address number where the customer lives. i.e. the '123' from '123 Elm St.'
+      - name: unit
+        description: Apartment unit if applicable
+      - name: region
+        description: Region (State or Province) where the customer lives
+      - name: district
+        description: District (county) where the custopmer lives
+      - name: longitude
+        description: Longitude of the customer
+      - name: latitude
+        description: Latitude of the customer
+      - name: ship_to_address
+        description: Shipping address
+      - name: valid_from
+        description: Start time when the record is valid 
+      - name: valid_to
+        description: End time when the record is no longer valid. NULL if still valid
 
   - name: stg_retail_loyalty_segments
     columns:
       - name: loyalty_segment_id
+        description: Primary key 
         tests:
           - unique
           - not_null
+      - name: loyalty_segment_description
+        description: Description of the loyalty segment level
+      - name: unit_threshold
+        description: Threshold to access the loyalty segment
+      - name: valid_from
+        description: Date when record started to be valid
+      - name: valid_to
+        description: Date when record became invalid, NULL if still valid
 
   - name: stg_retail_sales_orders
     columns:
       - name: order_id
+        description: Order number - Primary Key
         tests:
           - unique
           - not_null
+      - name: customer_id
+        description: Customer who placed the order 
+        tests:
+          - relationships:
+              to: ref('stg_retail_customers')
+              field: customer_id
+      - name: customer_name
+        description: Full customer name (Last, First)
+      - name: number_of_line_items
+        description: Number of unique line items (SKU's) on the order
+      - name: order_datetime
+        description: Date the order was placed
+      - name: ordered_products
+        description: Products ordered by the customer
+      - name: promo_info
+        description: Promotions included with the order
+      - name: clicked_items
+        description: Array of clicked items
