@@ -68,7 +68,7 @@ models:
       - name: avg_units_per_customer
         description: Average units for customers in the segment
 
-  - name: int_retail_order_items
+  - name: int_retail__order_items
     description: This intermediate model pulls order details from the arrays contained within stg_retail_sales_orders
     columns:
       - name: order_item_id

@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_retail_customers
+  - name: stg_retail__customers
     columns:
       - name: customer_id
         description: Primary key for the customer
@@ -43,7 +43,7 @@ models:
       - name: valid_to
         description: End time when the record is no longer valid. NULL if still valid
 
-  - name: stg_retail_loyalty_segments
+  - name: stg_retail__loyalty_segments
     columns:
       - name: loyalty_segment_id
         description: Primary key 
@@ -59,7 +59,7 @@ models:
       - name: valid_to
         description: Date when record became invalid, NULL if still valid
 
-  - name: stg_retail_sales_orders
+  - name: stg_retail__sales_orders
     columns:
       - name: order_id
         description: Order number - Primary Key
