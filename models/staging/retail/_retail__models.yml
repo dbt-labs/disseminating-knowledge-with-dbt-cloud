@@ -12,7 +12,7 @@ models:
         description: Foreign key to the customers assigned loyalty segment
         tests:
           - relationships:
-              to: ref('stg_retail_loyalty_segments')
+              to: ref('stg_retail__loyalty_segments')
               field: loyalty_segment_id
       - name: customer_name
         description: Customer's full name
@@ -70,7 +70,7 @@ models:
         description: Customer who placed the order 
         tests:
           - relationships:
-              to: ref('stg_retail_customers')
+              to: ref('stg_retail__customers')
               field: customer_id
       - name: customer_name
         description: Full customer name (Last, First)
