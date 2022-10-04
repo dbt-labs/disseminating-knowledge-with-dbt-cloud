@@ -2,7 +2,7 @@ with
 
 segments as (
 
-    select * from {{ ref('stg_retail_loyalty_segments') }}
+    select * from {{ ref('stg_retail__loyalty_segments') }}
 
 ),
 
