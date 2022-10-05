@@ -2,13 +2,13 @@ with
 
 sales_orders as (
 
-    select * from {{ ref('stg_retail_sales_orders') }}
+    select * from {{ ref('stg_retail__sales_orders') }}
 
 ),
 
 order_items as (
 
-    select * from {{ ref('int_retail_order_items') }}
+    select * from {{ ref('int_retail__order_items') }}
 
 ),
 

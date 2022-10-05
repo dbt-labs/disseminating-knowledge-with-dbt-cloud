@@ -2,7 +2,7 @@ with
 
 customers as (
 
-    select * from {{ ref('stg_retail_customers') }}
+    select * from {{ ref('stg_retail__customers') }}
 
 ),
 

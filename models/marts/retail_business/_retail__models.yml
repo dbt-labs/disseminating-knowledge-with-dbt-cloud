@@ -1,7 +1,8 @@
 version: 2
 
 models:
-  - name: stg_retail_customers
+  - name: dim_retail_customers
+    description: This model lists all customers, their segment and if applicable, their lifetime value
     columns:
       - name: customer_id
         description: Primary key for the customer
@@ -10,10 +11,6 @@ models:
           - not_null
       - name: loyalty_segment_id
         description: Foreign key to the customers assigned loyalty segment
-        tests:
-          - relationships:
-              to: ref('stg_retail_loyalty_segments')
-              field: loyalty_segment_id
       - name: customer_name
         description: Customer's full name
       - name: state
@@ -42,11 +39,15 @@ models:
         description: Start time when the record is valid 
       - name: valid_to
         description: End time when the record is no longer valid. NULL if still valid
-
-  - name: stg_retail_loyalty_segments
+      - name: customer_total
+        description: Total order value from a customer
+      - name: total_units_bouight
+        description: Total unique items (SKU's) purchased by a customer
+  - name: dim_retail_loyalty_segments
+    description: This model brings together total sales, customers and units by loyalty segment
     columns:
       - name: loyalty_segment_id
-        description: Primary key 
+        description: Primary key
         tests:
           - unique
           - not_null
@@ -58,29 +59,43 @@ models:
         description: Date when record started to be valid
       - name: valid_to
         description: Date when record became invalid, NULL if still valid
+      - name: number_of_customers
+        description: Number of customers within the loyalty segment
+      - name: segment_total
+        description: Total dollar amount of sales in the segment
+      - name: segment_units_bought
+        description: Total number of units purchased in the segment
+      - name: avg_units_per_customer
+        description: Average units for customers in the segment
 
-  - name: stg_retail_sales_orders
+  - name: int_retail__order_items
+    description: This intermediate model pulls order details from the arrays contained within stg_retail_sales_orders
+    columns:
+      - name: order_item_id
+        description: Surrogate key from combined 'order_id','customer_id','product_id','price'
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: The ID for the order
+      - name: customer_id
+        description: The customer who placed the order
+      - name: product_id
+        description: The product ID that was purchased by the customer on a given order
+      - name: price
+        description: The price per unit
+      - name: items_total
+        description: The result of units * price
+  - name: fct_retail_orders
+    description: This model shows when each order was placed, who placed it and its total
     columns:
       - name: order_id
-        description: Order number - Primary Key
+        description: Primary key for the order
         tests:
           - unique
           - not_null
       - name: customer_id
-        description: Customer who placed the order 
-        tests:
-          - relationships:
-              to: ref('stg_retail_customers')
-              field: customer_id
+        description: ID for customer who placed the order
       - name: customer_name
-        description: Full customer name (Last, First)
-      - name: number_of_line_items
-        description: Number of unique line items (SKU's) on the order
-      - name: order_datetime
-        description: Date the order was placed
-      - name: ordered_products
-        description: Products ordered by the customer
-      - name: promo_info
-        description: Promotions included with the order
-      - name: clicked_items
-        description: Array of clicked items
+        description: Customer's full name
+        

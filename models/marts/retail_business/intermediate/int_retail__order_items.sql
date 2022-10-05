@@ -2,7 +2,7 @@ with
 
 sales_orders as (
 
-    select * from {{ ref('stg_retail_sales_orders') }}
+    select * from {{ ref('stg_retail__sales_orders') }}
 
 ),
 

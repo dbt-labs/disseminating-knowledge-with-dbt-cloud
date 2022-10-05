@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_payments
+  - name: stg_stripe__payments
     description: This model cleans up payment field names and ensures amount is in Dollars
     columns:
       - name: payment_id
