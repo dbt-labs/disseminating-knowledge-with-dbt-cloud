@@ -7,7 +7,7 @@ metrics:
     label: metric_average_order_amount.
     model: ref('orders')
 
-    type: max
+    type: average
     sql: amount
 
     timestamp: order_date
