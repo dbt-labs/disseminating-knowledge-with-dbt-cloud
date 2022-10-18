@@ -2,7 +2,9 @@ version: 2
 
 sources:
   - name: retail
+    description: Collection of data from our retail application
     schema: retail
+    loader: Stitch
     tables:
       - name: active_promotions
         columns:
